@@ -1,5 +1,4 @@
-# DuplaImage.Lib
-![DuplaImage.Lib Logo](https://www.nuget.org/Content/gallery/img/default-package-icon-256x256.png)
+# ![DuplaImage.Lib Logo](![DuplaImage.Lib Logo](https://api.nuget.org/v3-flatcontainer/duplaimage.lib/1.2.0/icon) ) DuplaImage.Lib
 DuplaImage.Lib is a .NET standard library offering several different perceptual hashing algorithms for detecting similar or duplicate images.
 
 ## Downloads
