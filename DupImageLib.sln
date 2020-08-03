@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DupImageLib", "DupImageLib\DupImageLib.csproj", "{7894DAC4-FC45-4CE8-A93F-98DF013E96F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DupImageLib.Tests", "DupImageLib.Tests\DupImageLib.Tests.csproj", "{6F3A6527-9359-48DC-A66D-65AB5B7B18FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DupImageLib.Tests", "DupImageLib.Tests\DupImageLib.Tests.csproj", "{6F3A6527-9359-48DC-A66D-65AB5B7B18FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib", "DuplaImage.Lib\DuplaImage.Lib.csproj", "{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7894DAC4-FC45-4CE8-A93F-98DF013E96F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7894DAC4-FC45-4CE8-A93F-98DF013E96F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7894DAC4-FC45-4CE8-A93F-98DF013E96F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7894DAC4-FC45-4CE8-A93F-98DF013E96F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6F3A6527-9359-48DC-A66D-65AB5B7B18FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F3A6527-9359-48DC-A66D-65AB5B7B18FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F3A6527-9359-48DC-A66D-65AB5B7B18FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F3A6527-9359-48DC-A66D-65AB5B7B18FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6CF18353-FDA2-4FF9-AA4B-C1A3361B945D}
 	EndGlobalSection
 EndGlobal

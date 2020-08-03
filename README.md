@@ -1,14 +1,15 @@
-# DupImageLib
-
-ImageDupLib is a .NET standard library offering several different perceptual hashing algorithms for detecting similar or duplicate images.
+# DuplaImage.Lib
+![DuplaImage.Lib Logo](https://www.nuget.org/Content/gallery/img/default-package-icon-256x256.png)
+DuplaImage.Lib is a .NET standard library offering several different perceptual hashing algorithms for detecting similar or duplicate images.
 
 ## Downloads
 
-DupImageLib is available as a [Nuget package](https://www.nuget.org/packages/DupImageLib/). You can laso donwload the Nuget packages from the [releases page](https://github.com/Quickshot/DupImageLib/releases).
+DuplaImage.Lib is available as a [Nuget package](https://www.nuget.org/packages/DuplaImage.Lib). 
+You can laso donwload the Nuget packages from the [releases page](https://github.com/MrSquirrely/DuplaImage.Lib/releases).
 
 ## Features
 
-DupImageLib implements the following perceptual hash algorithms:
+DuplaImage.Lib implements the following perceptual hash algorithms:
 
 - ### Average
   - Calculates the hash based on the average value of scaled down image. More in-depth explanation of the algorithm can be found [here](http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html). Extremely fast algorithm, but generates a lot of false positives. Can generate 64 or 256 bit hashes.
@@ -21,9 +22,9 @@ DupImageLib implements the following perceptual hash algorithms:
 
 All algorithms accepts the image input as a stream or as a path to filesystem location.
 
-DupImageLib also provides a function to compare hashes to return the similarity of the hashes.
+DuplaImage.Lib also provides a function to compare hashes to return the similarity of the hashes.
 
-DupImageLib uses [Magick.NET](https://github.com/dlemstra/Magick.NET) for image processing needs. Users of DupImageLib can use their own image processing library by providing an implementation of IImageTransformer and passing that to the ImageHashes constructor.
+DuplaImage.Lib uses [Magick.NET](https://github.com/dlemstra/Magick.NET) for image processing needs. Users of DupImageLib can use their own image processing library by providing an implementation of IImageTransformer and passing that to the ImageHashes constructor.
 
 ## Usage
 

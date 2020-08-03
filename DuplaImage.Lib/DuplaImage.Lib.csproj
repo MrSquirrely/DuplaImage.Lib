@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mr.Squirrely; Quickshot;</Authors>
+    <Company>MrSquirrely.net</Company>
+    <Description>DuplaImage.Lib is a .NET standard library offering several different perceptual hashing algorithms for detecting similar or duplicate images.</Description>
+    <PackageProjectUrl>https://github.com/MrSquirrely/DuplaImage.Lib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MrSquirrely/DuplaImage.Lib</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <PackageTags>image,duplicate,similar,percepual,hash</PackageTags>
+    <Version>1.2.0</Version>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>DuplaImageLogo.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="7.21.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\DuplaImageLogo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
