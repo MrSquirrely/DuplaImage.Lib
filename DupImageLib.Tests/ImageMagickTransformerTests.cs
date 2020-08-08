@@ -2,7 +2,7 @@
 
 namespace DuplaImage.Lib.Tests {
     public class ImageMagickTransformerTests {
-        private readonly ImageHashes _imgHashes = new ImageHashes(new ImageMagickTransformer());
+        private readonly ImageHashes _imgHashes = new ImageHashes(new ImageMagick.ImageMagickTransformer());
         
         [Fact]
         public void ComputeHash() => Assert.Equal(0x0f0f0f0f0f0f0f0fUL, _imgHashes.CalculateMedianHash64("testPattern1.png"));

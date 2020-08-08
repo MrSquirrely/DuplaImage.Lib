@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DuplaImage.ImageMagick\DuplaImage.Lib.ImageMagick.csproj" />
     <ProjectReference Include="..\DuplaImage.Lib\DuplaImage.Lib.csproj" />
   </ItemGroup>
 

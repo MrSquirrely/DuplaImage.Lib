@@ -31,12 +31,12 @@ DuplaImage.Lib uses [Magick.NET](https://github.com/dlemstra/Magick.NET) for ima
 
 ```csharp
 // Create new ImageHashes instance using ImageMackick as image manipulation library
-var imageHasher = new ImageHashes(new ImageMagickTransformer());
+ImageHashes ImageHasher = new ImageHashes(new ImageMagickTransformer());
 // Calculate 64 bit hashes for the images using difference algorithm
-var hash1 = imageHasher.CalculateDifferenceHash64(@"testimage1.png");
-var hash2 = imageHasher.CalculateDifferenceHash64(@"testimage2.png");
+long Hash1 = imageHasher.CalculateDifferenceHash64(@"testimage1.png");
+long Hash2 = imageHasher.CalculateDifferenceHash64(@"testimage2.png");
 // Calculate similarity between the hashes. Score of 1.0 indicates identical images.
-var similarity = ImageHashes.CompareHashes(hash1, hash2);
+float similarity = ImageHashes.CompareHashes(hash1, hash2);
 ```
 
 ## License
