@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib", "DuplaImag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DupImageLib.Tests", "DupImageLib.Tests\DupImageLib.Tests.csproj", "{0189D3E8-3270-40DE-82A3-B6BA5934FA1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuplaImage.Lib.ImageMagick", "DuplaImage.ImageMagick\DuplaImage.Lib.ImageMagick.csproj", "{827997F5-49AA-4945-B933-89D3B652450A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib.ImageMagick", "DuplaImage.ImageMagick\DuplaImage.Lib.ImageMagick.csproj", "{827997F5-49AA-4945-B933-89D3B652450A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,9 +13,9 @@ namespace DuplaImage.Lib.ImageMagick {
                 ColorSpace = ColorSpace.Gray,
                 Colors = 256
             };
-            magickImage.Quantize(settings);
             MagickGeometry size = new MagickGeometry(width, height) { IgnoreAspectRatio = true };
             magickImage.Resize(size);
+            magickImage.Quantize(settings);
             magickImage.Format = MagickFormat.Gray;
             return magickImage.ToByteArray();
         }
