@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
 namespace DuplaImage.Lib.Hashes {
     internal static class DifferenceHash64 {
@@ -11,9 +8,10 @@ namespace DuplaImage.Lib.Hashes {
         /// See http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html for algorithm description.
         /// </summary>
         /// <param name="sourceStream">Stream containing an image to be hashed.</param>
+        /// <param name="transformer">Transformer to use</param>
         /// <returns>64 bit difference hash of the input image.</returns>
-        internal static ulong Calculate(Stream sourceStream, IImageTransformer _transformer) {
-            byte[] pixels = _transformer.TransformImage(sourceStream, 9, 8);
+        internal static ulong Calculate(Stream sourceStream, IImageTransformer transformer) {
+            byte[] pixels = transformer.TransformImage(sourceStream, 9, 8);
 
             // Iterate pixels and set hash to 1 if the left pixel is brighter than the right pixel.
             ulong hash = 0UL;

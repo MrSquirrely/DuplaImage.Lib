@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace DuplaImage.Lib.Hashes {
     internal static class MedianHash256 {
-
         /// <summary>
         /// Calculates a 256 bit hash for the given image using median algorithm.
         /// 
         /// Works by converting the image to 16x16 greyscale image, finding the median pixel value from it, and then marking
         /// all pixels where value is greater than median value as 1 in the resulting hash. Should be more resistant to non-linear
-        /// image edits when compared agains average based implementation.
+        /// image edits when compared against average based implementation.
         /// </summary>
         /// <param name="sourceStream">Stream containing an image to be hashed.</param>
-        /// <returns>256 bit median hash of the input image. Composed of 4 ulongs.</returns>
-        internal static ulong[] Calculate(Stream sourceStream, IImageTransformer _transformer) {
-            byte[] pixels = _transformer.TransformImage(sourceStream, 16, 16);
+        /// <param name="transformer">Transformer to use</param>
+        /// <returns>256 bit median hash of the input image. Composed of 4 uLongs.</returns>
+        internal static ulong[] Calculate(Stream sourceStream, IImageTransformer transformer) {
+            byte[] pixels = transformer.TransformImage(sourceStream, 16, 16);
 
             // Calculate median
-            List<byte> pixelList = new List<byte>(pixels);
+            List<byte> pixelList = new(pixels);
             pixelList.Sort();
             // Even amount of pixels
             byte median = (byte)((pixelList[127] + pixelList[128]) / 2);

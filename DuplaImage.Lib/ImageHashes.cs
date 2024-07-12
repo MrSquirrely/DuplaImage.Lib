@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using DuplaImage.Lib.Hashes;
 
 namespace DuplaImage.Lib {
@@ -40,7 +38,7 @@ namespace DuplaImage.Lib {
         /// image edits when compared against average based implementation.
         /// </summary>
         /// <param name="pathToImage">Path to an image to be hashed.</param>
-        /// <returns>256 bit median hash of the input image. Composed of 4 ulongs.</returns>
+        /// <returns>256 bit median hash of the input image. Composed of 4 uLongs.</returns>
         public ulong[] CalculateMedianHash256(string pathToImage) => MedianHash256.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
 
         /// <summary>
@@ -124,7 +122,7 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="hash">Input value</param>
         /// <returns>Count of ones in input value</returns>
-        private ulong HammingWeight(ulong hash) {
+        private static ulong HammingWeight(ulong hash) {
             hash -= (hash >> 1) & M1;
             hash = (hash & M2) + ((hash >> 2) & M2);
             hash = (hash + (hash >> 4)) & M4;

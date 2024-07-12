@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace DuplaImage.Lib.Hashes {
     internal class DCTHash {
 
         private float[][] _dctMatrix;
         private bool _isDctMatrixInitialized;
-        private readonly object _dctMatrixLockObject = new object();
+        private readonly object _dctMatrixLockObject = new();
 
         /// <summary>
         /// Calculates a hash for the given image using dct algorithm
         /// </summary>
         /// <param name="sourceStream">Stream to the image used for hash calculation.</param>
+        /// <param name="transformer">Transformer to use</param>
         /// <returns>64 bit difference hash of the input image.</returns>
-        internal ulong Calculate(Stream sourceStream, IImageTransformer _transformer) {
+        internal ulong Calculate(Stream sourceStream, IImageTransformer transformer) {
             lock (_dctMatrixLockObject) {
                 if (!_isDctMatrixInitialized) {
                     _dctMatrix = GenerateDctMatrix(32);
@@ -23,7 +23,7 @@ namespace DuplaImage.Lib.Hashes {
                 }
             }
 
-            byte[] pixels = _transformer.TransformImage(sourceStream, 32, 32);
+            byte[] pixels = transformer.TransformImage(sourceStream, 32, 32);
 
             // Copy pixel data and convert to float
             float[] fPixels = new float[1024];
@@ -43,7 +43,7 @@ namespace DuplaImage.Lib.Hashes {
             }
 
             // Calculate median
-            List<float> pixelList = new List<float>(dctHashPixels);
+            List<float> pixelList = new(dctHashPixels);
             pixelList.Sort();
             // Even amount of pixels
             float median = (pixelList[31] + pixelList[32]) / 2;
@@ -114,7 +114,7 @@ namespace DuplaImage.Lib.Hashes {
         /// Matrix multiplication.
         /// </summary>
         /// <param name="a">First matrix.</param>
-        /// <param name="b">Second matric.</param>
+        /// <param name="b">Second matrix.</param>
         /// <returns>Result matrix.</returns>
         private static float[][] Multiply(IReadOnlyList<float[]> a, IReadOnlyList<float[]> b) {
             int n = a[0].Length;

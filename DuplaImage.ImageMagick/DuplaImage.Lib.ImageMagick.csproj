@@ -1,37 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>DuplaImage.Lib.ImageMagick</AssemblyName>
     <RootNamespace>DuplaImage.Lib.ImageMagick</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/MrSquirrely/DuplaImage.Lib</PackageProjectUrl>
     <PackageIcon>DuplaImageLogo.png</PackageIcon>
     <RepositoryUrl>https://github.com/MrSquirrely/DuplaImage.Lib</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>image,duplicate,similar,percepual,hash,DupImageLib,ImageMagick,Image,Magick</PackageTags>
     <Description>Image Magick addon for DuplaImage.Lib</Description>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="..\DuplaImageLogo.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="7.21.1" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.9.1" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DuplaImage.Lib\DuplaImage.Lib.csproj" />
   </ItemGroup>
-
 </Project>

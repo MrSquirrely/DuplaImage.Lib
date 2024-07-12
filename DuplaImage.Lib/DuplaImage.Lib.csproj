@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mr.Squirrely,Quickshot</Authors>
     <Company>MrSquirrely.net</Company>
@@ -10,24 +9,29 @@
     <RepositoryUrl>https://github.com/MrSquirrely/DuplaImage.Lib</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>image,duplicate,similar,percepual,hash,DupImageLib</PackageTags>
-    <Version>1.2.3</Version>
-    <PackageLicenseExpression></PackageLicenseExpression>
+    <Version>1.2.4</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>DuplaImageLogo.png</PackageIcon>
-    <AssemblyVersion>1.2.3.0</AssemblyVersion>
+    <AssemblyVersion></AssemblyVersion>
     <PackageId>DuplaImage.Lib</PackageId>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="..\DuplaImageLogo.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
 </Project>

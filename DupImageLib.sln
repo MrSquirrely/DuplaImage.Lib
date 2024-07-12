@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib", "DuplaImage.Lib\DuplaImage.Lib.csproj", "{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DupImageLib.Tests", "DupImageLib.Tests\DupImageLib.Tests.csproj", "{0189D3E8-3270-40DE-82A3-B6BA5934FA1F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib.ImageMagick", "DuplaImage.ImageMagick\DuplaImage.Lib.ImageMagick.csproj", "{827997F5-49AA-4945-B933-89D3B652450A}"
 EndProject
@@ -19,10 +17,6 @@ Global
 		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD7A17E5-7607-4F0E-8420-026EF5E2A1D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0189D3E8-3270-40DE-82A3-B6BA5934FA1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0189D3E8-3270-40DE-82A3-B6BA5934FA1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0189D3E8-3270-40DE-82A3-B6BA5934FA1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0189D3E8-3270-40DE-82A3-B6BA5934FA1F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{827997F5-49AA-4945-B933-89D3B652450A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{827997F5-49AA-4945-B933-89D3B652450A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{827997F5-49AA-4945-B933-89D3B652450A}.Release|Any CPU.ActiveCfg = Release|Any CPU

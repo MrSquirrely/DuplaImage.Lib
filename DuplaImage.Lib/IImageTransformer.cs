@@ -2,11 +2,11 @@
 
 namespace DuplaImage.Lib {
     /// <summary>
-    /// Interface used for implementing image conversion operations in the hashing funcions in ImageHashes class.
+    /// Interface used for implementing image conversion operations in the hashing functions in ImageHashes class.
     /// </summary>
     public interface IImageTransformer {
         /// <summary>
-        /// Converts given image in a stream to a grayscale image with single 8 bit color channel and resizes it to the given width and height.
+        /// Converts given image in a stream to a gray-scale image with single 8 bit color channel and resizes it to the given width and height.
         /// Aspect ratio should be ignored during resizing operation.
         /// </summary>
         /// <param name="stream">Stream to the image to be converted.</param>

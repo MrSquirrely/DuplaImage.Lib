@@ -6,16 +6,18 @@ namespace DuplaImage.Lib.ImageMagick {
     /// Implements IImageTransformer interface using Magick.NET for image transforms.
     /// </summary>
     public class ImageMagickTransformer : IImageTransformer {
+
+        private readonly QuantizeSettings _settings = new() {
+            ColorSpace = ColorSpace.Gray,
+            Colors = 256
+        };
+
         public byte[] TransformImage(Stream stream, int width, int height) {
             // Read image
-            MagickImage magickImage = new MagickImage(stream);
-            QuantizeSettings settings = new QuantizeSettings {
-                ColorSpace = ColorSpace.Gray,
-                Colors = 256
-            };
-            MagickGeometry size = new MagickGeometry(width, height) { IgnoreAspectRatio = true };
+            MagickImage magickImage = new(stream);
+            MagickGeometry size = new(width, height) { IgnoreAspectRatio = true };
             magickImage.Resize(size);
-            magickImage.Quantize(settings);
+            _ = magickImage.Quantize(_settings);
             magickImage.Format = MagickFormat.Gray;
             return magickImage.ToByteArray();
         }
