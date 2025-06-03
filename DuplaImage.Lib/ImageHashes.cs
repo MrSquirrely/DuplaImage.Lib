@@ -20,6 +20,13 @@ namespace DuplaImage.Lib {
         public ulong CalculateAverageHash64(string pathToImage) => AverageHash64.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
 
         /// <summary>
+        /// Calculates a 64 bit hash for the given image using average algorithm.
+        /// </summary>
+        /// <param name="image">Stream containing image.</param>
+        /// <returns>64 bit average hash of the input image.</returns>
+        public ulong CalculateAverageHash64(Stream image) => AverageHash64.Calculate(image, _transformer);
+
+        /// <summary>
         /// Calculates a 64 bit hash for the given image using median algorithm.
         /// 
         /// Works by converting the image to 8x8 greyscale image, finding the median pixel value from it, and then marking
@@ -29,6 +36,17 @@ namespace DuplaImage.Lib {
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>64 bit median hash of the input image.</returns>
         public ulong CalculateMedianHash64(string pathToImage) => MedianHash64.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+
+        /// <summary>
+        /// Calculates a 64 bit hash for the given image using median algorithm.
+        /// 
+        /// Works by converting the image to 8x8 greyscale image, finding the median pixel value from it, and then marking
+        /// all pixels where value is greater than median value as 1 in the resulting hash. Should be more resistant to non-linear
+        /// image edits when compared against average based implementation.
+        /// </summary>
+        /// <param name="image">Stream containing image.</param>
+        /// <returns>64 bit median hash of the input image.</returns>
+        public ulong CalculateMedianHash64(Stream image) => MedianHash64.Calculate(image, _transformer);
 
         /// <summary>
         /// Calculates a 256 bit hash for the given image using median algorithm.
@@ -42,6 +60,17 @@ namespace DuplaImage.Lib {
         public ulong[] CalculateMedianHash256(string pathToImage) => MedianHash256.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
 
         /// <summary>
+        /// Calculates a 256 bit hash for the given image using median algorithm.
+        /// 
+        /// Works by converting the image to 16x16 greyscale image, finding the median pixel value from it, and then marking
+        /// all pixels where value is greater than median value as 1 in the resulting hash. Should be more resistant to non-linear
+        /// image edits when compared against average based implementation.
+        /// </summary>
+        /// <param name="image">Stream containing image.</param>
+        /// <returns>256 bit median hash of the input image. Composed of 4 uLongs.</returns>
+        public ulong[] CalculateMedianHash256(Stream image) => MedianHash256.Calculate(image, _transformer);
+
+        /// <summary>
         /// Calculates 64 bit hash for the given image using difference hash.
         /// 
         /// See http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html for algorithm description.
@@ -49,6 +78,15 @@ namespace DuplaImage.Lib {
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>64 bit difference hash of the input image.</returns>
         public ulong CalculateDifferenceHash64(string pathToImage) => DifferenceHash64.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+
+        /// <summary>
+        /// Calculates 64 bit hash for the given image using difference hash.
+        /// 
+        /// See http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html for algorithm description.
+        /// </summary>
+        /// <param name="image">Stream containing image.</param>
+        /// <returns>64 bit difference hash of the input image.</returns>
+        public ulong CalculateDifferenceHash64(Stream image) => DifferenceHash64.Calculate(image, _transformer);
 
         /// <summary>
         /// Calculates 256 bit hash for the given image using difference hash.
@@ -60,11 +98,27 @@ namespace DuplaImage.Lib {
         public ulong[] CalculateDifferenceHash256(string pathToImage) => DifferenceHash256.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
 
         /// <summary>
+        /// Calculates 256 bit hash for the given image using difference hash.
+        /// 
+        /// See http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html for algorithm description.
+        /// </summary>
+        /// <param name="image">Stream containing image.</param>
+        /// <returns>64 bit difference hash of the input image.</returns>
+        public ulong[] CalculateDifferenceHash256(Stream image) => DifferenceHash256.Calculate(image, _transformer);
+
+        /// <summary>
         /// Calculates a hash for the given image using dct algorithm
         /// </summary>
         /// <param name="path">Path to the image used for hash calculation.</param>
         /// <returns>64 bit difference hash of the input image.</returns>
         public ulong CalculateDctHash(string path) => new DCTHash().Calculate(new FileStream(path, FileMode.Open, FileAccess.Read),_transformer);
+
+        /// <summary>
+        /// Calculates a hash for the given image using dct algorithm
+        /// </summary>
+        /// <param name="image">Stream containing image.</param>
+        /// <returns>64 bit difference hash of the input image.</returns>
+        public ulong CalculateDctHash(Stream image) => new DCTHash().Calculate(image, _transformer);
 
         /// <summary>
         /// Compare hashes of two images using Hamming distance. Result of 1 indicates images being 
