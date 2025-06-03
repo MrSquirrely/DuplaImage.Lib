@@ -9,8 +9,8 @@
     <RepositoryUrl>https://github.com/MrSquirrely/DuplaImage.Lib</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>image,duplicate,similar,percepual,hash,DupImageLib,ImageMagick,Image,Magick</PackageTags>
-    <Description>Image Magick addon for DuplaImage.Lib</Description>
-    <Version>1.0.2</Version>
+    <Description>Image Magick Transformer for DuplaImage.Lib</Description>
+    <Version>1.1.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
@@ -26,7 +26,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.9.1" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.6.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DuplaImage.Lib\DuplaImage.Lib.csproj" />

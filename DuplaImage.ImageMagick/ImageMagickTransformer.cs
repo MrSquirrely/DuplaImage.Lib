@@ -12,7 +12,7 @@ namespace DuplaImage.Lib.ImageMagick {
             Colors = 256
         };
 
-        public byte[] TransformImage(Stream stream, int width, int height) {
+        public byte[] TransformImage(Stream stream, uint width, uint height) {
             // Read image
             MagickImage magickImage = new(stream);
             MagickGeometry size = new(width, height) { IgnoreAspectRatio = true };

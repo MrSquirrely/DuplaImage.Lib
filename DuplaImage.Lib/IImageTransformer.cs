@@ -13,6 +13,6 @@ namespace DuplaImage.Lib {
         /// <param name="width">Width of the resized image.</param>
         /// <param name="height">Height of the resized image.</param>
         /// <returns>Byte array containing 8 bit pixel values of the converted image.</returns>
-        byte[] TransformImage(Stream stream, int width, int height);
+        byte[] TransformImage(Stream stream, uint width, uint height);
     }
 }

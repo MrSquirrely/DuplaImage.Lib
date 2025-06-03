@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/MrSquirrely/DuplaImage.Lib</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>image,duplicate,similar,percepual,hash,DupImageLib</PackageTags>
-    <Version>1.2.4</Version>
+    <Version>1.3.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>DuplaImageLogo.png</PackageIcon>
     <AssemblyVersion></AssemblyVersion>

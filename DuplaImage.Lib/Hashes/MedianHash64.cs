@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace DuplaImage.Lib.Hashes {
     internal static class MedianHash64 {
@@ -15,6 +17,7 @@ namespace DuplaImage.Lib.Hashes {
         /// <returns>64 bit median hash of the input image.</returns>
         internal static ulong Calculate(Stream sourceStream, IImageTransformer transformer) {
             byte[] pixels = transformer.TransformImage(sourceStream, 8, 8);
+            ReadOnlySpan<byte> pixelSpan = pixels;
 
             // Calculate median
             List<byte> pixelList = new(pixels);
@@ -23,14 +26,20 @@ namespace DuplaImage.Lib.Hashes {
             byte median = (byte)((pixelList[31] + pixelList[32]) / 2);
 
             // Iterate pixels and set them to 1 if over median and 0 if lower.
+            ulong hash = CalculateHash(pixelSpan, median);
+
+            // Done
+            return hash;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static ulong CalculateHash(ReadOnlySpan<byte> pixelSpan, byte median) {
             ulong hash = 0UL;
             for (int i = 0; i < 64; i++) {
-                if (pixels[i] > median) {
+                if (pixelSpan[i] > median) {
                     hash |= 1UL << i;
                 }
             }
-
-            // Done
             return hash;
         }
     }

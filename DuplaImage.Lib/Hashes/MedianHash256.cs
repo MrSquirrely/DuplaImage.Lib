@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace DuplaImage.Lib.Hashes {
     internal static class MedianHash256 {
@@ -15,6 +17,7 @@ namespace DuplaImage.Lib.Hashes {
         /// <returns>256 bit median hash of the input image. Composed of 4 uLongs.</returns>
         internal static ulong[] Calculate(Stream sourceStream, IImageTransformer transformer) {
             byte[] pixels = transformer.TransformImage(sourceStream, 16, 16);
+            ReadOnlySpan<byte> pixelSpan = pixels;
 
             // Calculate median
             List<byte> pixelList = new(pixels);
@@ -23,21 +26,26 @@ namespace DuplaImage.Lib.Hashes {
             byte median = (byte)((pixelList[127] + pixelList[128]) / 2);
 
             // Iterate pixels and set them to 1 if over median and 0 if lower.
-            ulong hash64 = 0UL;
-            ulong[] hash = new ulong[4];
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 64; j++) {
-                    if (pixels[(64 * i) + j] > median) {
-                        hash64 |= 1UL << j;
-                    }
-                }
-                hash[i] = hash64;
-                hash64 = 0UL;
-            }
+            ulong[] hash = CalculateHash(pixelSpan, median);
 
             // Done
             return hash;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static ulong[] CalculateHash(ReadOnlySpan<byte> pixelSpan, byte median) {
+            ulong[] hash = new ulong[4];
+            for (int i = 0; i < 4; i++) {
+                ulong hash64 = 0UL;
+                for (int j = 0; j < 64; j++) {
+                    if (pixelSpan[(64 * i) + j] > median) {
+                        hash64 |= 1UL << j;
+                    }
+                }
+                hash[i] = hash64;
+            }
+
+            return hash;
+        }
     }
 }

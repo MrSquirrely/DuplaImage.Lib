@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace DuplaImage.Lib.Hashes {
     internal class DCTHash {
@@ -49,12 +50,7 @@ namespace DuplaImage.Lib.Hashes {
             float median = (pixelList[31] + pixelList[32]) / 2;
 
             // Iterate pixels and set them to 1 if over median and 0 if lower.
-            ulong hash = 0UL;
-            for (int i = 0; i < 64; i++) {
-                if (dctHashPixels[i] > median) {
-                    hash |= 1UL << i;
-                }
-            }
+            ulong hash = CalculateHash(dctHashPixels, median);
 
             // Done
             return hash;
@@ -150,5 +146,15 @@ namespace DuplaImage.Lib.Hashes {
             return transpose;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static ulong CalculateHash(float[] dctHashPixels, float median) {
+            ulong hash = 0UL;
+            for (int i = 0; i < 64; i++) {
+                if (dctHashPixels[i] > median) {
+                    hash |= 1UL << i;
+                }
+            }
+            return hash;
+        }
     }
 }

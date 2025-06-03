@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib", "DuplaImag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplaImage.Lib.ImageMagick", "DuplaImage.ImageMagick\DuplaImage.Lib.ImageMagick.csproj", "{827997F5-49AA-4945-B933-89D3B652450A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuplaImage.Lib.ImageSharpTransformer", "DuplaImage.Lib.ImageSharpTransformer\DuplaImage.Lib.ImageSharpTransformer.csproj", "{87F995EA-2B8B-41B8-AB6D-95AC8FC78E96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{827997F5-49AA-4945-B933-89D3B652450A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{827997F5-49AA-4945-B933-89D3B652450A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{827997F5-49AA-4945-B933-89D3B652450A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F995EA-2B8B-41B8-AB6D-95AC8FC78E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F995EA-2B8B-41B8-AB6D-95AC8FC78E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F995EA-2B8B-41B8-AB6D-95AC8FC78E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F995EA-2B8B-41B8-AB6D-95AC8FC78E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

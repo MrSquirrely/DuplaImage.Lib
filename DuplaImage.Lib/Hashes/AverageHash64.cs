@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace DuplaImage.Lib.Hashes {
     internal static class AverageHash64 {
@@ -11,22 +10,28 @@ namespace DuplaImage.Lib.Hashes {
         /// <param name="transformer">Transformer to use</param>
         /// <returns>64 bit average hash of the input image.</returns>
         internal static ulong Calculate(Stream sourceStream, IImageTransformer transformer) {
-            byte[] pixels = transformer.TransformImage(sourceStream, 8, 8);
+            ReadOnlySpan<byte> pixelSpan = transformer.TransformImage(sourceStream, 8, 8);
 
-            // Calculate average
-            List<byte> pixelList = new(pixels);
-            int total = pixelList.Aggregate(0, (current, pixel) => current + pixel);
-            int average = total / 64;
-
-            // Iterate pixels and set them to 1 if over average and 0 if lower.
-            ulong hash = 0UL;
+            // Calculate average using direct sum without allocations
+            int total = 0;
             for (int i = 0; i < 64; i++) {
-                if (pixels[i] > average) {
-                    hash |= 1UL << i;
+                total += pixelSpan[i];
+            }
+            byte average = (byte)(total >> 6); // Divide by 64 using bit shift
+
+            // Build hash using optimized bit operations
+            ulong hash = 0UL;
+            for (int i = 0; i < 64; i += 8) {
+                byte chunk = 0;
+                // Process 8 pixels at once
+                for (int j = 0; j < 8; j++) {
+                    if (pixelSpan[i + j] > average) {
+                        chunk |= (byte)(1 << j);
+                    }
                 }
+                hash |= (ulong)chunk << i;
             }
 
-            // Done
             return hash;
         }
     }
