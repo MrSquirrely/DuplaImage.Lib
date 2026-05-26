@@ -44,10 +44,11 @@ namespace DuplaImage.Lib.Hashes {
             }
 
             // Calculate median
-            List<float> pixelList = new(dctHashPixels);
-            pixelList.Sort();
+            Span<float> sortedPixels = stackalloc float[64];
+            dctHashPixels.AsSpan().CopyTo(sortedPixels);
+            sortedPixels.Sort();
             // Even amount of pixels
-            float median = (pixelList[31] + pixelList[32]) / 2;
+            float median = (sortedPixels[31] + sortedPixels[32]) / 2;
 
             // Iterate pixels and set them to 1 if over median and 0 if lower.
             ulong hash = CalculateHash(dctHashPixels, median);
