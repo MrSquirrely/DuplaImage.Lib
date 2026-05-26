@@ -1,0 +1,4 @@
+## 2024-05-26 - [Resource Leak: Unclosed FileStream in ImageHashes.cs]
+ **Vulnerability:** Unclosed and undisposed `FileStream` objects created implicitly when calling image hash calculation methods (e.g., `CalculateAverageHash64`, `CalculateMedianHash64`, `CalculateDifferenceHash64`, `CalculateDctHash`) taking a `string path`.
+ **Learning:** Instantiating `IDisposable` objects like `FileStream` directly as arguments without properly tracking or wrapping them leads to resource leaks (e.g., unclosed file handles) that could cause application hangs, denial of service, or exceptions when the system runs out of available file handles.
+ **Prevention:** Always ensure `IDisposable` types are properly handled using `using` declarations or statements so that their resources are deterministicly disposed of when no longer needed.
