@@ -1,0 +1,4 @@
+## 2024-05-26 - Fix Resource Leak with Unclosed FileStream
+ **Vulnerability:** Unclosed FileStream objects in methods taking a file path (e.g., `CalculateMedianHash64(string)`). A new `FileStream` was instantiated directly in the argument of another method call, which meant the instance was lost to the caller and therefore its resources (file handles) were not disposed correctly after use.
+ **Learning:** In C#, objects implementing `IDisposable` (like `FileStream`) must be disposed of properly to release underlying unmanaged resources, such as file handles. Failing to do so can lead to exhaustion of resources and application crashes.
+ **Prevention:** Always assign `IDisposable` instances to variables and wrap them in a `using` statement (or `using var` declaration in modern C#) to guarantee disposal, even if exceptions occur. Never instantiate an `IDisposable` object anonymously inline unless the receiving method explicitly takes ownership and guarantees disposal.
