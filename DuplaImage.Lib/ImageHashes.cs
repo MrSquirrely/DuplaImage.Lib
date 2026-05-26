@@ -17,7 +17,11 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>64 bit average hash of the input image.</returns>
-        public ulong CalculateAverageHash64(string pathToImage) => AverageHash64.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+        public ulong CalculateAverageHash64(string pathToImage)
+        {
+            using var stream = new FileStream(pathToImage, FileMode.Open, FileAccess.Read);
+            return AverageHash64.Calculate(stream, _transformer);
+        }
 
         /// <summary>
         /// Calculates a 64 bit hash for the given image using average algorithm.
@@ -35,7 +39,11 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>64 bit median hash of the input image.</returns>
-        public ulong CalculateMedianHash64(string pathToImage) => MedianHash64.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+        public ulong CalculateMedianHash64(string pathToImage)
+        {
+            using var stream = new FileStream(pathToImage, FileMode.Open, FileAccess.Read);
+            return MedianHash64.Calculate(stream, _transformer);
+        }
 
         /// <summary>
         /// Calculates a 64 bit hash for the given image using median algorithm.
@@ -57,7 +65,11 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>256 bit median hash of the input image. Composed of 4 uLongs.</returns>
-        public ulong[] CalculateMedianHash256(string pathToImage) => MedianHash256.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+        public ulong[] CalculateMedianHash256(string pathToImage)
+        {
+            using var stream = new FileStream(pathToImage, FileMode.Open, FileAccess.Read);
+            return MedianHash256.Calculate(stream, _transformer);
+        }
 
         /// <summary>
         /// Calculates a 256 bit hash for the given image using median algorithm.
@@ -77,7 +89,11 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>64 bit difference hash of the input image.</returns>
-        public ulong CalculateDifferenceHash64(string pathToImage) => DifferenceHash64.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+        public ulong CalculateDifferenceHash64(string pathToImage)
+        {
+            using var stream = new FileStream(pathToImage, FileMode.Open, FileAccess.Read);
+            return DifferenceHash64.Calculate(stream, _transformer);
+        }
 
         /// <summary>
         /// Calculates 64 bit hash for the given image using difference hash.
@@ -95,7 +111,11 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="pathToImage">Path to an image to be hashed.</param>
         /// <returns>64 bit difference hash of the input image.</returns>
-        public ulong[] CalculateDifferenceHash256(string pathToImage) => DifferenceHash256.Calculate(new FileStream(pathToImage, FileMode.Open, FileAccess.Read), _transformer);
+        public ulong[] CalculateDifferenceHash256(string pathToImage)
+        {
+            using var stream = new FileStream(pathToImage, FileMode.Open, FileAccess.Read);
+            return DifferenceHash256.Calculate(stream, _transformer);
+        }
 
         /// <summary>
         /// Calculates 256 bit hash for the given image using difference hash.
@@ -111,7 +131,11 @@ namespace DuplaImage.Lib {
         /// </summary>
         /// <param name="path">Path to the image used for hash calculation.</param>
         /// <returns>64 bit difference hash of the input image.</returns>
-        public ulong CalculateDctHash(string path) => new DCTHash().Calculate(new FileStream(path, FileMode.Open, FileAccess.Read),_transformer);
+        public ulong CalculateDctHash(string path)
+        {
+            using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            return new DCTHash().Calculate(stream, _transformer);
+        }
 
         /// <summary>
         /// Calculates a hash for the given image using dct algorithm
