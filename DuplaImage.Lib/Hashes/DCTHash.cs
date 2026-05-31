@@ -32,16 +32,8 @@ namespace DuplaImage.Lib.Hashes {
                 fPixels[i] = pixels[i] / 255.0f;
             }
 
-            // Calculate dct
-            float[][] dctPixels = ComputeDct(fPixels, _dctMatrix);
-
-            // Get 8*8 area from 1,1 to 8,8, ignoring lowest frequencies for improved detection
-            float[] dctHashPixels = new float[64];
-            for (int x = 0; x < 8; x++) {
-                for (int y = 0; y < 8; y++) {
-                    dctHashPixels[x + (y * 8)] = dctPixels[x + 1][y + 1];
-                }
-            }
+            // Calculate dct and get 8*8 area from 1,1 to 8,8, ignoring lowest frequencies for improved detection
+            float[] dctHashPixels = ComputeDctHashPixels(fPixels, _dctMatrix);
 
             // Calculate median
             Span<float> sortedPixels = stackalloc float[64];
@@ -58,28 +50,44 @@ namespace DuplaImage.Lib.Hashes {
         }
 
         /// <summary>
-        /// Compute DCT for the image.
+        /// Compute DCT for the image and return the 8x8 crop of frequencies used for the hash.
+        /// Optimized to only calculate the necessary 8x8 subset instead of the full 32x32 matrix.
         /// </summary>
         /// <param name="image">Image to calculate the dct.</param>
         /// <param name="dctMatrix">DCT coefficient matrix</param>
-        /// <returns>DCT transform of the image</returns>
-        private static float[][] ComputeDct(IReadOnlyList<float> image, float[][] dctMatrix) {
-            // Get the size of dct matrix. We assume that the image is same size as dctMatrix
-            int size = dctMatrix.GetLength(0);
+        /// <returns>8x8 DCT transform subset of the image</returns>
+        private static float[] ComputeDctHashPixels(float[] image, float[][] dctMatrix) {
+            // Hardcoded size for DCT hash images
+            int size = 32;
 
-            // Make image matrix
-            float[][] imageMat = new float[size][];
-            for (int i = 0; i < size; i++) {
-                imageMat[i] = new float[size];
-            }
+            float[] bRow = new float[size];
+            float[] dctHashPixels = new float[64];
 
-            for (int y = 0; y < size; y++) {
-                for (int x = 0; x < size; x++) {
-                    imageMat[y][x] = image[x + (y * size)];
+            for (int x = 0; x < 8; x++) {
+                int i = x + 1;
+                float[] dctRowI = dctMatrix[i];
+                Array.Clear(bRow, 0, size);
+
+                for (int k = 0; k < size; k++) {
+                    float a_ik = dctRowI[k];
+                    int kSize = k * size;
+                    for (int j = 0; j < size; j++) {
+                        bRow[j] += a_ik * image[kSize + j];
+                    }
+                }
+
+                for (int y = 0; y < 8; y++) {
+                    int j = y + 1;
+                    float sum = 0;
+                    float[] dctRowJ = dctMatrix[j];
+                    for (int k = 0; k < size; k++) {
+                        sum += bRow[k] * dctRowJ[k];
+                    }
+                    dctHashPixels[x + (y * 8)] = sum;
                 }
             }
 
-            return Multiply(Multiply(dctMatrix, imageMat), Transpose(dctMatrix));
+            return dctHashPixels;
         }
 
         /// <summary>
@@ -105,46 +113,6 @@ namespace DuplaImage.Lib.Hashes {
                 }
             }
             return matrix;
-        }
-
-        /// <summary>
-        /// Matrix multiplication.
-        /// </summary>
-        /// <param name="a">First matrix.</param>
-        /// <param name="b">Second matrix.</param>
-        /// <returns>Result matrix.</returns>
-        private static float[][] Multiply(IReadOnlyList<float[]> a, IReadOnlyList<float[]> b) {
-            int n = a[0].Length;
-            float[][] c = new float[n][];
-            for (int i = 0; i < n; i++) {
-                c[i] = new float[n];
-            }
-
-            for (int i = 0; i < n; i++) {
-                for (int k = 0; k < n; k++) {
-                    for (int j = 0; j < n; j++)
-                        c[i][j] += a[i][k] * b[k][j];
-                }
-            }
-
-            return c;
-        }
-
-        /// <summary>
-        /// Transposes square matrix.
-        /// </summary>
-        /// <param name="mat">Matrix to be transposed</param>
-        /// <returns>Transposed matrix</returns>
-        private static float[][] Transpose(IReadOnlyList<float[]> mat) {
-            int size = mat[0].Length;
-            float[][] transpose = new float[size][];
-
-            for (int i = 0; i < size; i++) {
-                transpose[i] = new float[size];
-                for (int j = 0; j < size; j++)
-                    transpose[i][j] = mat[j][i];
-            }
-            return transpose;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
