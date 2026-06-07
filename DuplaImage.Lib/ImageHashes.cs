@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Numerics;
 using DuplaImage.Lib.Hashes;
 
 namespace DuplaImage.Lib {
@@ -146,11 +147,8 @@ namespace DuplaImage.Lib {
         /// <param name="hash2">Second hash to be compared</param>
         /// <returns>Image similarity in range [0,1]</returns>
         public float CompareHashes(ulong hash1, ulong hash2) {
-            // XOR hashes
-            ulong hashDifference = hash1 ^ hash2;
-
-            // Calculate ones
-            ulong onesInHash = HammingWeight(hashDifference);
+            // XOR hashes and calculate ones using hardware intrinsic PopCount
+            int onesInHash = BitOperations.PopCount(hash1 ^ hash2);
 
             // Return result as a float between 0 and 1.
             return 1.0f - (onesInHash / 64.0f);
@@ -171,42 +169,15 @@ namespace DuplaImage.Lib {
             }
 
             int hashSize = hash1.Length;
-            ulong onesInHash = 0;
+            int onesInHash = 0;
 
-            // XOR hashes
-            ulong[] hashDifference = new ulong[hashSize];
-            for (int i = 0; i < hashSize; i++)  // Slightly faster than foreach
-            {
-                hashDifference[i] = hash1[i] ^ hash2[i];
-            }
-
-            // Calculate ones
+            // XOR hashes and calculate ones using hardware intrinsic PopCount, avoiding allocations
             for (int i = 0; i < hashSize; i++) {
-                onesInHash += HammingWeight(hashDifference[i]);
+                onesInHash += BitOperations.PopCount(hash1[i] ^ hash2[i]);
             }
 
             // Return result as a float between 0 and 1.
             return 1.0f - (onesInHash / (hashSize * 64.0f));    //Assuming 64bit variables
         }
-
-        /// <summary>
-        /// Calculate ones in hash using Hamming weight. See http://en.wikipedia.org/wiki/Hamming_weight
-        /// </summary>
-        /// <param name="hash">Input value</param>
-        /// <returns>Count of ones in input value</returns>
-        private static ulong HammingWeight(ulong hash) {
-            hash -= (hash >> 1) & M1;
-            hash = (hash & M2) + ((hash >> 2) & M2);
-            hash = (hash + (hash >> 4)) & M4;
-            ulong onesInHash = (hash * H01) >> 56;
-
-            return onesInHash;
-        }
-
-        // Hamming distance constants. See http://en.wikipedia.org/wiki/Hamming_weight for explanation.
-        private const ulong M1 = 0x5555555555555555; //binary: 0101...
-        private const ulong M2 = 0x3333333333333333; //binary: 00110011..
-        private const ulong M4 = 0x0f0f0f0f0f0f0f0f; //binary:  4 zeros,  4 ones ...
-        private const ulong H01 = 0x0101010101010101; //the sum of 256 to the power of 0,1,2,3...
     }
 }
