@@ -1,0 +1,4 @@
+## 2024-06-07 - Magick.NET Unsafe Coders SSRF/XXE Risk
+**Vulnerability:** Magick.NET allows potentially unsafe remote/local fetch coders (HTTP, HTTPS, MVG, MSL, EPHEMERAL, URL) by default unless explicitly disabled, leading to Server-Side Request Forgery (SSRF) and XML External Entity (XXE) vulnerabilities when processing user-provided image streams.
+**Learning:** We must apply a restrictive `policymap` via `MagickNET.Initialize()` early in application startup, for instance via a static constructor, to securely disable these coders in `DuplaImage.Lib.ImageMagick` before any image processing occurs.
+**Prevention:** Always initialize Magick.NET with an explicitly configured strict policy map setting the rights of remote/unsafe coders to "none". Ensure no direct invocations of Magick functions occur prior to this initialization.
