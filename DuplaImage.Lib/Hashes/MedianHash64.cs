@@ -20,11 +20,10 @@ namespace DuplaImage.Lib.Hashes {
             ReadOnlySpan<byte> pixelSpan = pixels;
 
             // Calculate median
-            Span<byte> sortedPixels = stackalloc byte[64];
-            pixelSpan.CopyTo(sortedPixels);
-            sortedPixels.Sort();
+            List<byte> pixelList = new(pixels);
+            pixelList.Sort();
             // Even amount of pixels
-            byte median = (byte)((sortedPixels[31] + sortedPixels[32]) / 2);
+            byte median = (byte)((pixelList[31] + pixelList[32]) / 2);
 
             // Iterate pixels and set them to 1 if over median and 0 if lower.
             ulong hash = CalculateHash(pixelSpan, median);
